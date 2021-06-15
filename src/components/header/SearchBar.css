@@ -1,0 +1,43 @@
+.content {
+    background-color : #80596D;
+    display: grid;
+    grid-template-columns: 1fr 10fr 1fr 1fr;
+    align-content: center;
+}
+
+
+.search input[type="text"] {
+    width : 200px ;
+    padding-left : 25px;   
+    border-radius : 10px; 
+    height : 20px;
+    border : 1px solid gray;
+    grid-column-start: 2;
+}
+
+.search input[type="text"]:focus {
+    outline: none;
+    border : 1px solid #008CBA
+}
+
+.icons{
+    grid-column-start: 3;
+    grid-column-end: span 1;
+    display: flex;
+    justify-content: space-between;
+}
+
+span{
+    position : absolute;
+    /* Todo */
+    left : 8%;
+    color : gray;
+    margin: auto;
+  
+}
+
+.search {
+    grid-column-start: 2;
+}
+
+
