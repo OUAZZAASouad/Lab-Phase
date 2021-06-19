@@ -2,13 +2,16 @@ export const MODAL  = 'MODAL'
 export const DATA   = 'DATA'
 export const ADD    = 'ADD'
 export const DELETE = 'DELETE'
+export const SERVICECATEGORY = 'SERVICECATEGORY'
+export const SERVICEPRODUCT  = 'SERVICEPRODUCT'
+export const RESAPI = 'RESAPI'
 
 export const dataTest =  [
-    {'id':'1','src':'https://img.phonandroid.com/2020/07/galaxy-note-20-standard-60hz-8go-ram-12mp-d%C3%A9ception.jpg'},
-    {'id':'2','src':'https://media.mfbproject.co.za/repos/2017_alfa_romeo_stelvioquadrifoglio_official_09.jpg'},
-    {'id':'3','src':'https://media.mfbproject.co.za/repos/2018-alfa-romeo-stelvio-quadrifoglio-specs-photos-speed-2.jpg'},
-    {'id':'4','src':'https://media.mfbproject.co.za/repos/alfa-romeo-giulia-quadrifoglio-2017-us-wallpapers-and-hd-images-13.jpg'},
-    {'id':'5','src':'https://media.mfbproject.co.za/repos/ARWP_Infra_Desk_1920_1080_Quad.png'}
+    {'id':'1','src':'https://www.91-cdn.com/hub/wp-content/uploads/2019/04/March-review-summary.jpg'},
+    {'id':'2','src':'https://www.guidance.com/hs-fs/hubfs/Desktop%20Fitbit%20Homepage%20Banner.png?width=1280&height=798&name=Desktop%20Fitbit%20Homepage%20Banner.png'},
+    {'id':'3','src':'https://www.slowlinebag.com/wp-content/uploads/2021/01/shop-banner-m3.jpg'},
+    {'id':'4','src':'https://static.fibre2fashion.com/articleresources/images/76/7525/luxury-kidswear-big.jpg'},
+    {'id':'5','src':'https://brand.assets.reebok.com/f_auto,q_auto,fl_lossy/capi/reebok_enCA/floatgrow-hero_293-438151.jpg'}
   ];
 
 export const categories = [
@@ -5312,6 +5315,8 @@ export const dataInfo = {"productsByCategory":
            }
         }
      }
-]}
+],
+"Detailsproduct" : []
+}
 
 

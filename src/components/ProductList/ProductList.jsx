@@ -3,9 +3,11 @@ import {useParams} from 'react-router-dom'
 import ReactPaginate from 'react-paginate'
 import {useEffect, useState} from 'react'
 import {connect} from 'react-redux'
-import {setData} from '../../actions'
+import {setData, serviceCategories} from '../../actions'
 import {category} from '../../services/Api'
+import {Link} from 'react-router-dom'
 import './ProductList.css'
+
 
 const mapStateToProps = state => {
     return {
@@ -16,29 +18,26 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch =>{
     return {
-        setData   : (data)    => dispatch(setData(data)),
+        setData             : (item)    => dispatch(setData(item)),
+        serviceCategories   : (item)    => dispatch(serviceCategories(item)),
     }
   }
 
-const ProductList = ({data, setData}) => {
+const ProductList = ({data, setData, serviceCategories}) => {
     const categorieId = useParams()
-    var item = data.productsByCategory.find(element => element.id === parseInt(categorieId.categorieId) );
-
-    // TODO refactoring 
-    if ( item === undefined && data.productsByCategory.length !== 2) {
+    var elt = data.productsByCategory.find(element => element.id === parseInt(categorieId.categorieId));
+    var item  = []
+    if (elt === undefined) {
         category(parseInt(categorieId.categorieId)).then(res =>{
-            var elt = res.data.data.searchResult.mods.itemList.content
-            let new_data = Object.assign({}, data , {
-                productsByCategory : [...data.productsByCategory, {id : parseInt(categorieId.categorieId), value : res}]
-            })
-            setData(new_data)
+            serviceCategories({id : parseInt(categorieId.categorieId), value : res})
+            item = res.data.data.searchResult.mods.itemList.content
           });
+        
     }
-    else if (data.productsByCategory.length !== 0){
-        var elt = item.value.data.data.searchResult.mods.itemList.content
+    else {
+        item = elt.value.data.data.searchResult.mods.itemList.content
     }    
-    var item = elt === undefined ? [] : elt
-
+    
     const [offset, setOffset] = useState(0)
     const [currentPage, setCurrentPage] = useState(0)
     const [list, setList] = useState([])
@@ -54,14 +53,14 @@ const ProductList = ({data, setData}) => {
     
     useEffect( () => {
         setList(item.slice(offset, offset + perPage))
-    }, [offset])
+        console.log(item.slice(offset, offset + perPage))
+    }, [offset, item])
 
     return(
         <div className = 'wrapper'>
            <div className = 'products'> 
                 {list.map(item =>{ 
-                    console.log(item)
-                    return(<Card article = {item}></Card>)}
+                    return(<Link to={`product/${item.productId}`}><Card article = {item}></Card></Link>)}
                     )}
             </div>
              <ReactPaginate

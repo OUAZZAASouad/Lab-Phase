@@ -1,5 +1,5 @@
 
-import {MODAL, DATA, ADD, DELETE} from '../Vars'
+import {MODAL, DATA, ADD, DELETE, SERVICECATEGORY, SERVICEPRODUCT, RESAPI} from '../Vars'
 
 
 
@@ -32,4 +32,24 @@ export function Delete(payload){
             payload
         }
     )
+}
+
+export function serviceCategories(payload){
+    return({
+        type : SERVICECATEGORY,
+        payload
+    })
+}
+
+export function serviceProducts(payload){
+    return({
+        type : SERVICEPRODUCT,
+        payload
+    })
+}
+
+export function getResApi(payload){
+    return({type : RESAPI,
+        payload
+    })
 }

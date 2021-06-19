@@ -27,6 +27,7 @@ const Content = ({panierStore, total, Delete}) => {
                 <div style = {{display : 'flex', justifyContent : 'space-between'}}>
                     <img src = {item.image}/>
                     <p>{item.price.formatedAmount}</p>
+                    <p>Quantity {item.quantite}</p>
                     <div onClick = {() => Delete(item)}>
                         <FontAwesomeIcon icon = {faTimes}/>
                     </div>

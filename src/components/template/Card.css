@@ -4,7 +4,8 @@
     max-width: 100%;
     width: 230px;
     /* min-width: 210px; */
-    min-height: 290px;
+    /* min-height: 290px; */
+    height: 450px;
     display: flex;
     flex-flow: column;
     background-color: #ecf0f1;

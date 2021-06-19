@@ -3,6 +3,7 @@ import {faSearch, faShoppingCart, faHome} from '@fortawesome/free-solid-svg-icon
 import './SearchBar.css'
 import {setModal} from '../../actions/index'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 
 
 const mapStateToProps = state => {
@@ -28,11 +29,12 @@ const SearchBar = ({setModal, modalIsOpen}) => {
             </div>
             <div className = 'icons'>
                   <div>
-                      <FontAwesomeIcon icon = {faHome} color = 'white' />
+                    <Link to = '/'><FontAwesomeIcon icon = {faHome} color = 'white' /> </Link>
                   </div>
                 <div onClick = {setModal}>
                     <FontAwesomeIcon icon = {faShoppingCart} color = 'white'/>
                 </div>
+               
             </div>
         </div>
     )
