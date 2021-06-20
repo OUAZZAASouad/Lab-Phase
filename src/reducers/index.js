@@ -44,13 +44,6 @@ function rootReducer(state, action){
         localStorage.setItem('data', JSON.stringify(dataValues.data));
         return dataValues
 
-        case RESAPI :
-            return Object.assign({}, state, {
-                resApi : action.payload
-            })
-
-
-
         default :
             return state
     }

@@ -18,44 +18,36 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch =>{
     return {
-        setData             : (item)    => dispatch(setData(item)),
         serviceCategories   : (item)    => dispatch(serviceCategories(item)),
     }
   }
 
-const ProductList = ({data, setData, serviceCategories}) => {
+const ProductList = ({data, serviceCategories}) => {
+
     const categorieId = useParams()
-    var elt = data.productsByCategory.find(element => element.id === parseInt(categorieId.categorieId));
-    var item  = []
-    if (elt === undefined) {
-        category(parseInt(categorieId.categorieId)).then(res =>{
-            serviceCategories({id : parseInt(categorieId.categorieId), value : res})
-            item = res.data.data.searchResult.mods.itemList.content
-          });
-        
-    }
-    else {
-        item = elt.value.data.data.searchResult.mods.itemList.content
-    }    
-    
     const [offset, setOffset] = useState(0)
-    const [currentPage, setCurrentPage] = useState(0)
     const [list, setList] = useState([])
+    const [item, setItem] = useState([])
+    let perPage = 10
+    let pageCount = Math.ceil(item.length / perPage)
+
 
     const handlePageClick = (e) => {
         const selectedPage = e.selected;
         setOffset(selectedPage * perPage);
-        setCurrentPage(selectedPage)
     };
-    // TODO : end 
-    let perPage = 10
-    let pageCount = Math.ceil(item.length / perPage)
     
     useEffect( () => {
+        var elt = data.productsByCategory.find(element => element.id === parseInt(categorieId.categorieId));
+        console.log(elt)
+        elt === undefined ? category(parseInt(categorieId.categorieId)).then(res =>{
+            serviceCategories({id : parseInt(categorieId.categorieId), value : res})
+            setItem(res.data.data.searchResult.mods.itemList.content)
+          }): setItem(elt.value.data.data.searchResult.mods.itemList.content)
+        // pagination
         setList(item.slice(offset, offset + perPage))
-        console.log(item.slice(offset, offset + perPage))
-    }, [offset, item])
-
+    }, [offset, categorieId, item])
+    // console.log(item)
     return(
         <div className = 'wrapper'>
            <div className = 'products'> 

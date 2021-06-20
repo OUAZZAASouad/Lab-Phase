@@ -8,7 +8,6 @@ const initState = {
     data              : dataInfo,
     panierStore       : [],
     total             : 0,
-    resApi            : {}
 }
 
 const store = createStore(rootReducer, initState);

@@ -7,6 +7,12 @@
    /* gridColumnStart : '2', gridColumnEnd :'span 1', gridRowStart : '5', gridRowEnd : 'span 1'}} */
 }
 
+.loading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .gallery{
     z-index: 0;
     max-width : 600px

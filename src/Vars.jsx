@@ -4,7 +4,6 @@ export const ADD    = 'ADD'
 export const DELETE = 'DELETE'
 export const SERVICECATEGORY = 'SERVICECATEGORY'
 export const SERVICEPRODUCT  = 'SERVICEPRODUCT'
-export const RESAPI = 'RESAPI'
 
 export const dataTest =  [
     {'id':'1','src':'https://www.91-cdn.com/hub/wp-content/uploads/2019/04/March-review-summary.jpg'},
