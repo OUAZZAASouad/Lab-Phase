@@ -3,15 +3,18 @@ import {useParams} from 'react-router-dom'
 import ReactPaginate from 'react-paginate'
 import {useEffect, useState} from 'react'
 import {connect} from 'react-redux'
-import {setData, serviceCategories} from '../../actions'
+import {loadProduct, serviceCategories} from '../../actions'
 import {category} from '../../services/Api'
 import {Link} from 'react-router-dom'
 import './ProductList.css'
+import Filter from '../template/Filter'
 
 
 const mapStateToProps = state => {
     return {
-        data           : state.data
+        data            : state.data,
+        filtredProducts : state.filtredProducts,
+        productList     : state.productList,
         
     }
   }
@@ -19,17 +22,17 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch =>{
     return {
         serviceCategories   : (item)    => dispatch(serviceCategories(item)),
+        loadProduct         : (data)    => dispatch(loadProduct(data))
     }
   }
 
-const ProductList = ({data, serviceCategories}) => {
+const ProductList = ({data, serviceCategories, loadProduct, filtredProducts}) => {
 
     const categorieId = useParams()
     const [offset, setOffset] = useState(0)
     const [list, setList] = useState([])
-    const [item, setItem] = useState([])
     let perPage = 10
-    let pageCount = Math.ceil(item.length / perPage)
+    let pageCount = Math.ceil(filtredProducts.length / perPage)
 
 
     const handlePageClick = (e) => {
@@ -39,18 +42,20 @@ const ProductList = ({data, serviceCategories}) => {
     
     useEffect( () => {
         var elt = data.productsByCategory.find(element => element.id === parseInt(categorieId.categorieId));
-        console.log(elt)
         elt === undefined ? category(parseInt(categorieId.categorieId)).then(res =>{
             serviceCategories({id : parseInt(categorieId.categorieId), value : res})
-            setItem(res.data.data.searchResult.mods.itemList.content)
-          }): setItem(elt.value.data.data.searchResult.mods.itemList.content)
+            loadProduct(res.data.data.searchResult.mods.itemList.content)
+            // setItem(res.data.data.searchResult.mods.itemList.content)
+          }): loadProduct(elt.value.data.data.searchResult.mods.itemList.content)
         // pagination
-        setList(item.slice(offset, offset + perPage))
-    }, [offset, categorieId, item])
-    // console.log(item)
+        
+        setList(filtredProducts.slice(offset, offset + perPage))
+    }, [offset, categorieId, filtredProducts])
+    // console.log(productList)
     return(
         <div className = 'wrapper'>
-           <div className = 'products'> 
+            <Filter/>
+            <div className = 'products'> 
                 {list.map(item =>{ 
                     return(<Link to={`product/${item.productId}`}><Card article = {item}></Card></Link>)}
                     )}

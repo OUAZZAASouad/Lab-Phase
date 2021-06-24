@@ -1,4 +1,4 @@
-import {MODAL, DATA, ADD, DELETE, SERVICECATEGORY, SERVICEPRODUCT, RESAPI} from '../Vars'
+import {MODAL, DATA, ADD, DELETE, SERVICECATEGORY, SERVICEPRODUCT, FILTER, LOAD, ELEMENTS} from '../Vars'
 
 function rootReducer(state, action){
     switch (action.type){
@@ -44,6 +44,33 @@ function rootReducer(state, action){
         localStorage.setItem('data', JSON.stringify(dataValues.data));
         return dataValues
 
+        case LOAD :
+            return Object.assign({}, state, {
+                productList : action.payload,
+                filtredProducts :  JSON.stringify(state.productList) === JSON.stringify(action.payload)? state.filtredProducts : action.payload
+            })
+
+        case FILTER :
+        // if (state.productList.length > 0 ){
+        //     console.log(state.productList[2].umpPrices.sale_price.minPrice)
+        //     // console.log(state.productList[2].umpPrices.sale_price.minPrice)
+        //     console.log('title',state.productList[2].title.displayTitle.toLowerCase().includes(action.payload.title.toLowerCase()))
+        // }
+        state.productList.map(item => {
+            // console.log('title---------')
+            // console.log(item.title.displayTitle.toLowerCase())
+            // console.log(item.title.displayTitle.toLowerCase().includes(action.payload.title.toLowerCase()))
+            // console.log('---------------- price')
+            // console.log(state.productList[0].umpPrices.sale_price.minPrice)
+            // console.log((action.payload.price[0] === 0 && action.payload.price[1] === 0 ) || (state.productList[0].umpPrices.sale_price.minPrice>= parseFloat(action.payload.price[0]) && state.productList[0].umpPrices.sale_price.minPrice<=parseFloat(action.payload.price[1])))
+            console.log('rate', ( ("evaluation" in item ? item.evaluation.starRating : 4) <= parseFloat(action.payload.rate) ))
+        })
+            
+        console.log((action.payload.price[0] === 0 && action.payload.price[1] === 0 ) || (state.productList[2].umpPrices.sale_price.minPrice>= parseFloat(action.payload.price[0]) && state.productList[2].umpPrices.sale_price.minPrice<=parseFloat(action.payload.price[1])) )
+        console.log('filter')    
+        return Object.assign({}, state, {
+                filtredProducts : state.productList.filter(item => item.title.displayTitle.toLowerCase().includes(action.payload.title.toLowerCase()) && ((action.payload.price[0] === 0 && action.payload.price[1] === 0 ) || (item.umpPrices.sale_price.minPrice>= parseFloat(action.payload.price[0]) && item.umpPrices.sale_price.minPrice<=parseFloat(action.payload.price[1]))) && (action.payload.rate === 0  || ( ("evaluation" in item ? item.evaluation.starRating : 4) <= parseFloat(action.payload.rate) )) )
+            })
         default :
             return state
     }

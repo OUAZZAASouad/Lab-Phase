@@ -42,8 +42,7 @@ const Product = ({addToPanier, serviceProducts, data}) => {
     
         res.data !== undefined ? setImages(res.data.imageModule.imagePathList.map(function(item, index) {
             return {original : item, thumbnail : res.data.imageModule.summImagePathList[index] };
-          })) :  setImages([])
-         
+          })) :  setImages([]) 
     },[JSON.stringify(res)])
     
     return(

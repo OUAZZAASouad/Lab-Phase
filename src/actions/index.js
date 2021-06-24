@@ -1,5 +1,5 @@
 
-import {MODAL, DATA, ADD, DELETE, SERVICECATEGORY, SERVICEPRODUCT} from '../Vars'
+import {MODAL, DATA, ADD, DELETE, SERVICECATEGORY, SERVICEPRODUCT, FILTER, LOAD} from '../Vars'
 
 
 
@@ -44,6 +44,20 @@ export function serviceCategories(payload){
 export function serviceProducts(payload){
     return({
         type : SERVICEPRODUCT,
+        payload
+    })
+}
+
+export function filterProduct(payload){
+    return({
+        type : FILTER,
+        payload
+    })
+}
+
+export function loadProduct(payload){
+    return({
+        type : LOAD,
         payload
     })
 }
