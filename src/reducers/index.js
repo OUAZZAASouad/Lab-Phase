@@ -1,4 +1,5 @@
-import {MODAL, DATA, ADD, DELETE, SERVICECATEGORY, SERVICEPRODUCT, FILTER, LOAD, ELEMENTS} from '../Vars'
+import {MODAL, DATA, ADD, DELETE, SERVICECATEGORY, SERVICEPRODUCT, FILTER, LOAD, QUANTITY, ADDCOMMENT} from '../Vars'
+import dateFormat from 'dateformat';
 
 function rootReducer(state, action){
     switch (action.type){
@@ -50,27 +51,29 @@ function rootReducer(state, action){
                 filtredProducts :  JSON.stringify(state.productList) === JSON.stringify(action.payload)? state.filtredProducts : action.payload
             })
 
-        case FILTER :
-        // if (state.productList.length > 0 ){
-        //     console.log(state.productList[2].umpPrices.sale_price.minPrice)
-        //     // console.log(state.productList[2].umpPrices.sale_price.minPrice)
-        //     console.log('title',state.productList[2].title.displayTitle.toLowerCase().includes(action.payload.title.toLowerCase()))
-        // }
-        state.productList.map(item => {
-            // console.log('title---------')
-            // console.log(item.title.displayTitle.toLowerCase())
-            // console.log(item.title.displayTitle.toLowerCase().includes(action.payload.title.toLowerCase()))
-            // console.log('---------------- price')
-            // console.log(state.productList[0].umpPrices.sale_price.minPrice)
-            // console.log((action.payload.price[0] === 0 && action.payload.price[1] === 0 ) || (state.productList[0].umpPrices.sale_price.minPrice>= parseFloat(action.payload.price[0]) && state.productList[0].umpPrices.sale_price.minPrice<=parseFloat(action.payload.price[1])))
-            console.log('rate', ( ("evaluation" in item ? item.evaluation.starRating : 4) <= parseFloat(action.payload.rate) ))
-        })
-            
-        console.log((action.payload.price[0] === 0 && action.payload.price[1] === 0 ) || (state.productList[2].umpPrices.sale_price.minPrice>= parseFloat(action.payload.price[0]) && state.productList[2].umpPrices.sale_price.minPrice<=parseFloat(action.payload.price[1])) )
-        console.log('filter')    
-        return Object.assign({}, state, {
-                filtredProducts : state.productList.filter(item => item.title.displayTitle.toLowerCase().includes(action.payload.title.toLowerCase()) && ((action.payload.price[0] === 0 && action.payload.price[1] === 0 ) || (item.umpPrices.sale_price.minPrice>= parseFloat(action.payload.price[0]) && item.umpPrices.sale_price.minPrice<=parseFloat(action.payload.price[1]))) && (action.payload.rate === 0  || ( ("evaluation" in item ? item.evaluation.starRating : 4) <= parseFloat(action.payload.rate) )) )
+        case FILTER : 
+            return Object.assign({}, state, {
+                    filtredProducts : state.productList.filter(item => item.title.displayTitle.toLowerCase().includes(action.payload.title.toLowerCase()) && ((action.payload.price[0] === 0 && action.payload.price[1] === 0 ) || (item.umpPrices.sale_price.minPrice>= parseFloat(action.payload.price[0]) && item.umpPrices.sale_price.minPrice<=parseFloat(action.payload.price[1]))) && (action.payload.rate === 0  || ( ("evaluation" in item ? item.evaluation.starRating : 4) <= parseFloat(action.payload.rate) )) )
+                })
+        case QUANTITY :
+            return Object.assign({}, state, {
+                quantity : Math.max(state.quantity + action.payload, 0)
             })
+        case ADDCOMMENT : 
+            console.log(action.payload)
+            let newItems = Object.assign({}, state , {
+                data : Object.assign({}, state.data, {
+                    Detailsproduct : state.data.Detailsproduct.map(item => item.id === action.payload.product ? Object.assign({}, item,{
+                        value : Object.assign({}, item.value ,{
+                            evaViewList : item.value.evaViewList.concat({buyerName: action.payload.name, buyerFeedback:action.payload.feedback , evalDate:  dateFormat(new Date(), "mmmm dS, yyyy"), buyerEval : action.payload.rate * 100 / 5})
+                        }) 
+                    }): item)
+                    
+                })
+            })
+            localStorage.setItem('data', JSON.stringify(newItems.data));
+            return newItems
+            
         default :
             return state
     }

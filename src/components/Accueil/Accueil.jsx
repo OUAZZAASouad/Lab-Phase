@@ -37,7 +37,7 @@ const Accueil = ({data, setData}) =>{
         <div style = {{gridColumnStart : '1', gridColumnEnd :'span 3', gridRowStart : '2', gridRowEnd : 'span 1' , zIndex : '-1'}}>
             <SwiftSlider data={dataTest}/>
         </div>
-        <div style = {{gridColumnStart : '2', gridColumnEnd :'span 1', gridRowStart : '4', gridRowEnd : 'span 1' , zIndex : '0'}}>  
+        <div style = {{gridColumnStart : '2', gridColumnEnd :'span 1', gridRowStart : '4', gridRowEnd : 'span 1' }}>  
             {[{ id : 205838503, name : 'iPhones'}, { id : 200214006, name : 'Men\'s Watches'}].map(item => {
                 let arr = data.productsByCategory.find(element => element.id === item.id)
                 return (
@@ -46,7 +46,7 @@ const Accueil = ({data, setData}) =>{
                     <p style = {style}>{item.name}</p>
                     <Link to={`categories/${item.id}`}><p style = {style}>See More</p></Link>
                 </div>
-                    <div style = {{display : 'flex', justifyContent : 'space-between'}} >{arr.value.data.data.searchResult.mods.itemList.content.slice(4, 8).map(article => <Link to={`/categories/product/${article.productId}`}><Card article = {article} ></Card></Link>)}</div>
+                    <div style = {{display : 'flex', justifyContent : 'space-between'}} >{arr.value.slice(4, 8).map(article => <Link to={`/categories/product/${article.productId}`}><Card article = {article} ></Card></Link>)}</div>
                 </>)
             })}
         </div>    

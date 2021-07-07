@@ -8,7 +8,7 @@ import {Link} from 'react-router-dom'
 
 const mapStateToProps = state => {
     return {
-      modalIsOpen           : state.modalIsOpen
+      panierStore           : state.panierStore
         
     }
   }
@@ -20,7 +20,7 @@ const mapDispatchToProps = dispatch =>{
     }
   }
 
-const SearchBar = ({setModal, modalIsOpen}) => {
+const SearchBar = ({setModal, panierStore}) => {
     return (
         <div className = 'content'>
             <div className = 'search'>
@@ -31,8 +31,10 @@ const SearchBar = ({setModal, modalIsOpen}) => {
                   <div>
                     <Link to = '/'><FontAwesomeIcon icon = {faHome} color = 'white' /> </Link>
                   </div>
-                <div onClick = {setModal}>
+                <div onClick = {setModal} className = 'panier'>
                     <FontAwesomeIcon icon = {faShoppingCart} color = 'white'/>
+                    {panierStore.length !== 0 ? <div className = 'count'>{panierStore.length}</div>:<></>}
+                    
                 </div>
                
             </div>

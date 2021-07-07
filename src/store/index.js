@@ -9,7 +9,8 @@ const initState = {
     panierStore       : [],
     total             : 0,
     productList       : [],
-    filtredProducts   : []
+    filtredProducts   : [],
+    quantity          : 0
 }
 
 const store = createStore(rootReducer, initState);

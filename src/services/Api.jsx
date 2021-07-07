@@ -13,3 +13,10 @@ export const product = (id) => {
                 'x-rapidapi-key': process.env.REACT_APP_API_KEY
             }})    
 }
+
+export const feedback = (productId) => {
+    return axios.get(`https://ali-express1.p.rapidapi.com/product/${productId}/feedback/`,{
+            headers: {
+                'x-rapidapi-key': process.env.REACT_APP_API_KEY
+            }})    
+}

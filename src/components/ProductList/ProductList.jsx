@@ -1,6 +1,5 @@
 import Card from '../template/Card'
 import {useParams} from 'react-router-dom'
-import ReactPaginate from 'react-paginate'
 import {useEffect, useState} from 'react'
 import {connect} from 'react-redux'
 import {loadProduct, serviceCategories} from '../../actions'
@@ -8,6 +7,7 @@ import {category} from '../../services/Api'
 import {Link} from 'react-router-dom'
 import './ProductList.css'
 import Filter from '../template/Filter'
+import Pagination from '../template/Pagination'
 
 
 const mapStateToProps = state => {
@@ -32,21 +32,17 @@ const ProductList = ({data, serviceCategories, loadProduct, filtredProducts}) =>
     const [offset, setOffset] = useState(0)
     const [list, setList] = useState([])
     let perPage = 10
-    let pageCount = Math.ceil(filtredProducts.length / perPage)
-
-
-    const handlePageClick = (e) => {
-        const selectedPage = e.selected;
-        setOffset(selectedPage * perPage);
-    };
     
+    const handlePagination = (items) =>{
+        setOffset(items)
+    }
     useEffect( () => {
         var elt = data.productsByCategory.find(element => element.id === parseInt(categorieId.categorieId));
         elt === undefined ? category(parseInt(categorieId.categorieId)).then(res =>{
-            serviceCategories({id : parseInt(categorieId.categorieId), value : res})
+            serviceCategories({id : parseInt(categorieId.categorieId), value : res.data.data.searchResult.mods.itemList.content})
             loadProduct(res.data.data.searchResult.mods.itemList.content)
             // setItem(res.data.data.searchResult.mods.itemList.content)
-          }): loadProduct(elt.value.data.data.searchResult.mods.itemList.content)
+          }): loadProduct(elt.value)
         // pagination
         
         setList(filtredProducts.slice(offset, offset + perPage))
@@ -60,18 +56,7 @@ const ProductList = ({data, serviceCategories, loadProduct, filtredProducts}) =>
                     return(<Link to={`product/${item.productId}`}><Card article = {item}></Card></Link>)}
                     )}
             </div>
-             <ReactPaginate
-                    previousLabel={"prev"}
-                    nextLabel={"next"}
-                    breakLabel={"..."}
-                    breakClassName={"break-me"}
-                    pageCount={pageCount}
-                    marginPagesDisplayed={2}
-                    pageRangeDisplayed={5}
-                    onPageChange={handlePageClick}
-                    containerClassName={"pagination"}
-                    subContainerClassName={"pages pagination"}
-                    activeClassName={"active"}/>
+            <Pagination perPage = {perPage} data = {filtredProducts} handle = {handlePagination} />
         </div>
     )
     

@@ -14,7 +14,7 @@ const mapStateToProps = state => {
 
 const ModalPanier = ({panierStore, setModal}) => {
     return(
-        <div style = {{display: 'flex',flexDirection : 'column', justifyContent : 'space-between',alignItems : 'center', height : '500px', zIndex : '-1', position : 'relative'}}>
+        <div style = {{display: 'flex',flexDirection : 'column', justifyContent : 'space-between',alignItems : 'center', height : '500px', position : 'relative'}}>
               <div style = {{display: 'flex', justifyContent : 'space-between', width : '100%'}}>
                 <p>Mon Panier</p>
                 <div onClick={setModal}>

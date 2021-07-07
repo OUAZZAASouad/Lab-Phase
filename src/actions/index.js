@@ -1,5 +1,5 @@
 
-import {MODAL, DATA, ADD, DELETE, SERVICECATEGORY, SERVICEPRODUCT, FILTER, LOAD} from '../Vars'
+import {MODAL, DATA, ADD, DELETE, SERVICECATEGORY, SERVICEPRODUCT, FILTER, LOAD, QUANTITY, ADDCOMMENT} from '../Vars'
 
 
 
@@ -58,6 +58,20 @@ export function filterProduct(payload){
 export function loadProduct(payload){
     return({
         type : LOAD,
+        payload
+    })
+}
+
+export function setQuantity(payload){
+    return({
+        type : QUANTITY,
+        payload
+    })
+}
+
+export function addFeedback(payload){
+    return({
+        type : ADDCOMMENT,
         payload
     })
 }

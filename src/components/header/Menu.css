@@ -8,8 +8,14 @@ a:visited {
   
 a:hover {
     text-decoration: none;
+    color: #973c6b;
   }
   
 a:active {
     text-decoration: none;
+    color: #973c6b;
+}
+
+a {
+ color: gray;
 }
