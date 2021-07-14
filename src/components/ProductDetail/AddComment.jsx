@@ -37,7 +37,7 @@ const AddComponent = ({addFeedback}) => {
                 halfIcon={<i className="fa fa-star-half-alt"></i>}
                 fullIcon={<i className="fa fa-star"></i>}
                 activeColor="#ffd700"/>
-            <button className = 'button' onClick = { () => addFeedback({name: name.current.value, feedback: comment.current.value, rate : value, product : parseInt(productId.productId)})}>add </button>
+            <button className = 'button' onClick = { () => addFeedback({name: name.current.value[0] + '*'.repeat(name.current.value.length - 2) + name.current.value.slice(-1), feedback: comment.current.value, rate : value, product : parseInt(productId.productId)})}>add </button>
 
         </div>
     )
