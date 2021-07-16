@@ -24,8 +24,8 @@ const SearchBar = ({setModal, panierStore}) => {
     return (
         <div className = 'content'>
             <div className = 'search'>
-                <span><FontAwesomeIcon icon = {faSearch}/></span>
-                <input type = 'text' placeholder = 'Search'/>
+                {/* <span><FontAwesomeIcon icon = {faSearch}/></span>
+                <input type = 'text' placeholder = 'Search'/> */}
             </div>
             <div className = 'icons'>
                   <div>

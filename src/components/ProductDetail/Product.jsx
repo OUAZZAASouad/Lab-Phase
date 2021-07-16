@@ -55,7 +55,7 @@ const Product = ({addToPanier, serviceProducts, data, quantity, setQuantity}) =>
             {res.data === undefined ?  <ReactLoading type='spinningBubbles' color='#2c3e50' height={'20%'} width={'20%'}/> : 
             <>
                     <div className = 'gallery'>
-                    <ImageGallery additionalClass = 'slider' items={images} infinite = {false} thumbnailPosition = {'left'} showFullscreenButton = {false} useBrowserFullscreen = {false} showPlayButton = {false} useTranslate3D = {false} />
+                    <ImageGallery additionalClass = 'slider' items={images} infinite = {false} thumbnailPosition = {'left'} showFullscreenButton = {false} useBrowserFullscreen = {false} showPlayButton = {false} useTranslate3D = {false} showNav = {false} />
                     </div>
                     <div className = 'details'>
                         <div style = {{display: 'flex', flexDirection:'column', justifyContent : 'space-around'}}>

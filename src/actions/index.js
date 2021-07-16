@@ -4,6 +4,7 @@ import {MODAL, DATA, ADD, DELETE, SERVICECATEGORY, SERVICEPRODUCT, FILTER, LOAD,
 
 
 export function setModal() {
+    console.log('action')
     return( {
             type : MODAL
         })

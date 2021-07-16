@@ -5,6 +5,7 @@ function rootReducer(state, action){
     switch (action.type){
         
         case MODAL :
+            console.log('test')
             return Object.assign({}, state, {
                 modalIsOpen           : !state.modalIsOpen
             })

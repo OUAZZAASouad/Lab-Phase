@@ -1,0 +1,12 @@
+.filter input[type="text"] {
+    width : 200px ;
+    border-radius : 5px; 
+    height : 20px;
+    border : 1px solid gray;
+    grid-column-start: 2;
+}
+
+.filter input[type="text"]:focus {
+    outline: none;
+    border : 1px solid #008CBA
+}

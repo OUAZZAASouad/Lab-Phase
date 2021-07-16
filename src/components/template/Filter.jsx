@@ -6,6 +6,7 @@ import Slider from '@material-ui/core/Slider';
 import {connect} from 'react-redux'
 import {filterProduct} from '../../actions/index'
 import { useEffect } from 'react';
+import './Filter.css'
 
 const mapStateToProps = state => {
     return {
@@ -40,19 +41,19 @@ const Filter = ({filterProduct}) => {
     
     return(
         <>
-            <div style = {{borderBottom : '1px solid #80596D', borderTop : '1px solid #80596D', width : '100%', cursor : 'pointer'}}>
+            <div style = {{borderBottom : '1px solid #DCDCDC', borderTop : '1px solid #DCDCDC', width : '100%', cursor : 'pointer'}}>
                 <div style = {{display : 'flex', width : '10%', justifyContent : 'space-around'}} onClick = {() => setShow(!show)}>
                     <p style = {{color : '#80596D'}}><FontAwesomeIcon icon = {faFilter}/></p>
                     <p style = {{color : '#80596D'}}>FILTER</p>
                 </div>
             </div>
-            {show ? <div style = {{width : '100%', boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)', display : 'flex', justifyContent : 'space-around', height : '90px', alignItems : 'center', flexWrap : 'wrap'}}>
+            {show ? <div className = 'filter' style = {{width : '100%', marginTop :'20px', boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)', display : 'flex', justifyContent : 'space-around', height : '90px', alignItems : 'center', flexWrap : 'wrap'}}>
                         <div style = {{width : '50px'}}>
                             <label>Title </label>
-                            <input type = 'text'  onChange = { (e) => setTitle(e.target.value)}/>
+                            <input type = 'text'   onChange = { (e) => setTitle(e.target.value)}/>
                         </div>
                         <div style = {{width : '200px'}}>
-                        <Typography id="range-slider" gutterBottom> Price range </Typography>
+                        <Typography  id="range-slider" gutterBottom> Price range </Typography>
                         <Slider
                         value={priceRange}
                         onChange={handleChange}
